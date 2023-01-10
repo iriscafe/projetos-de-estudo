@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>E-commerce bolado</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="Itens">
+            <h2>vitrine</h2>
+
+        </div>
+
+        <div id="carrinho">
+            <h2>carrinho</h2>
+
+        </div>
+
+        <script>
+            const produtos = [
+                {
+                    id : 0,
+                    nome: 'RELOGIO',
+                    img: '',
+                    quantidade: 0
+                },
+                {
+                    id : 1,
+                    nome: 'ANEL',
+                    img: '',
+                    quantidade: 0
+                },
+                {
+                    id : 2,
+                    nome: 'SAPATO',
+                    img: '',
+                    quantidade: 0
+                }
+            ]
+        function inicializarloja(){
+            var containeritens = document.getElementById('Itens');
+            produtos.map((val)=>{
+                containeritens.innerHTML +=`
+                
+                <div class="prod-single">
+                    <img src = "`+val.img+`" />
+                    <p>"`+val.nome+`"</p>
+                    <a key="`+val.id+`" href="#">Add ao carrinho<a/>
+                </div>
+                `
+            })
+        }
+        function atualizarcarrinho(){
+            var containerCarrinho = document.getElementById('carrinho');
+            containerCarrinho.innerHTML=""
+            produtos.map((val)=>{
+                if(val.quantidade>0){
+                    containerCarrinho.innerHTML +=`
+                
+                <p>"`+val.nome+`" | quantidade: "`+val.quantidade+`"</p>
+                <hr>
+                `}
+
+            })
+        }
+
+        inicializarloja()
+
+        var links = document.getElementsByTagName('a')
+
+        for(var i=0; i < links.length; i++){
+            produtos[i].addEventListener("click", function(){
+                let key =  this.getAttribute('key')
+                produtos[key].quantidade++
+                atualizarcarrinho()
+                console.log("clicou")
+            })
+        }
+        </script>
+
+    </body>
+</html>
